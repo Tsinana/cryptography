@@ -8,6 +8,7 @@ def main():
     try:
         print("\n\nПрограммы:")
         print("(1)\tНахождение числа Эйлера")
+        print("(2)\tВычисления целых степеней по заданному модулю ")
         print("(0)\tВыход")
 
         choice = int(input("Выбор: "))
@@ -30,6 +31,12 @@ def main():
           else:
             ans_str = "Неверный выбор метода."
           print("\n" + ans_str)
+        elif choice == 2:
+          print("Для c ≡ a^b(mod n) введите соответствующие значения")
+          a = int(input("a: "))
+          b = int(input("b: "))
+          n = int(input("n: "))
+          print("\nc ≡ ", powm(a, b, n))
         elif choice == 0:
            break
         else:

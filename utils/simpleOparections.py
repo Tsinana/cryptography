@@ -24,3 +24,15 @@ def gcd(digit1, digit2):
     divisor = remainter
 
   return divisor
+
+
+def powm(a, b, n):
+  c = 1
+  while b:
+    if b % 2 == 0:
+      b /= 2
+      a = (a * a) % n
+    else:
+      b -= 1
+      c = (c * a) % n
+  return c
