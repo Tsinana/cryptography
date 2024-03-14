@@ -15,7 +15,7 @@ def eulerFunctionAPriory(digit):
   return counter
 
 
-def eulerFunction(dividend):
+def eulerFunction(dividend, getArr = False):
   """Функция Эйлера по формуле"""
 
   if not(isinstance(dividend, int)): 
@@ -23,6 +23,7 @@ def eulerFunction(dividend):
 
   divisor = 2
   answer = dividend
+  arrayDivisors = []
   
   while True:
     if divisor > dividend/2:
@@ -31,6 +32,7 @@ def eulerFunction(dividend):
     if dividend % divisor == 0:
       while dividend % divisor == 0:
         dividend = dividend / divisor
+        arrayDivisors.append(divisor)
 
       answer *= 1 - 1/divisor
 
@@ -38,6 +40,11 @@ def eulerFunction(dividend):
 
   if dividend != 1:
     answer *= 1 - 1/dividend
+    arrayDivisors.append(dividend)
+
+  if getArr:
+    return round(answer), list(map(lambda x: round(x), arrayDivisors))
+
   return round(answer)
 
 

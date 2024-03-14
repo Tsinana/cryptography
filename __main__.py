@@ -1,6 +1,7 @@
+from utils.primitiveElementsGF import allPrimitiveElements
 from utils.eulerFunction import *
 
-
+1
 def main():
   print("\n\n\nПривет!\t(´・ω ・`）")
 
@@ -9,6 +10,7 @@ def main():
         print("\n\nПрограммы:")
         print("(1)\tНахождение числа Эйлера")
         print("(2)\tВычисления целых степеней по заданному модулю ")
+        print("(3)\tПостроения всех примитивов заданного поля GF(2^n)")
         print("(0)\tВыход")
 
         choice = int(input("Выбор: "))
@@ -37,6 +39,13 @@ def main():
           b = int(input("b: "))
           n = int(input("n: "))
           print("\nc ≡ ", powm(a, b, n))
+        elif choice == 3:
+          print("Для поля GF(2^n) введите соответствующие значение")
+          n = int(input("n: "))
+          print()
+          for arr in allPrimitiveElements(n):
+            print("Неприводимый полином -",str(bin(arr[0])))
+            print(list(map(lambda el: str(bin(el)), arr[1])))
         elif choice == 0:
            break
         else:
