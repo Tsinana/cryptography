@@ -1,15 +1,25 @@
 from utils.eulerFunction import eulerFunction
 
 
-def multP(polynomialA, polynomialB):
-  """Умножение двух полиномов"""
+def multP(polynomialA, polynomialB, mod = -1, ):
+  """Умножение двух полиномов. Умножение двух полиномов по модулю"""
 
   iterator = 0
   polynomialLastStep = 0
 
+  modLength = -1
+  if mod != -1:
+    modClone = mod
+    while modClone != 0:
+      modLength += 1
+      modClone >>= 1
+
   while 1 << iterator <= polynomialB:
     if polynomialB & 1 << iterator != 0:
       polynomialLastStep = polynomialLastStep ^ polynomialA << iterator
+
+      if mod != -1 and polynomialLastStep >= 1 << modLength:
+        polynomialLastStep = divP(polynomialLastStep, mod)[0]
 
     iterator += 1
 
@@ -79,13 +89,13 @@ def allSimplePolynomials(n):
   return simplePs
 
 
-def povP(polynomial, degree):
-  """Возводит полином в степень"""
+def powP(polynomial, degree, mod = -1):
+  """Возводит полином в степень. Возводит полином в степень по модулю"""
 
   polynomialAns = polynomial
 
-  for step in range(degree):
-    polynomialAns = multP(polynomialAns, polynomial)
+  for step in range(degree - 1):
+    polynomialAns = multP(polynomialAns, polynomial, mod)
 
   return polynomialAns
 
@@ -107,8 +117,8 @@ def allPrimitiveElements(n):
     while startP < endP:
       isPrimitiveEl = True
 
-      for divMO in range(1,pMinusOne-1):
-        if divP(povP(startP,int(divMO)),simpleP)[0] == 1:
+      for divMO in divisorspMinusOne:
+        if powP(startP,int(pMinusOne/divMO),simpleP) == 1:
           print(f"{bin(startP)} - не примитив, так как в степени {divMO} по модулю {bin(simpleP)} имеет остаток 1")
 
           isPrimitiveEl = False
@@ -125,4 +135,5 @@ def allPrimitiveElements(n):
 
 
 
-print(divP(0b10001,0b10011))
+print(multP(0b1000000000000,0b1000,0b11001))
+print(powP(0b1000,5,0b11001))
