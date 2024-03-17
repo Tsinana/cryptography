@@ -1,4 +1,4 @@
-from utils.primitiveElementsGF import allPrimitiveElements
+from utils.primitiveElementsGF import allPrimitiveElements, getInfoGFN
 from utils.eulerFunction import *
 
 1
@@ -11,6 +11,7 @@ def main():
         print("(1)\tНахождение числа Эйлера")
         print("(2)\tВычисления целых степеней по заданному модулю ")
         print("(3)\tПостроения всех примитивов заданного поля GF(2^n)")
+        print("(4)\tПостроение циклотомических классов с из мин полиномами")
         print("(0)\tВыход")
 
         choice = int(input("Выбор: "))
@@ -46,12 +47,16 @@ def main():
           for arr in allPrimitiveElements(n):
             print("Неприводимый полином -",str(bin(arr[0])))
             print(list(map(lambda el: str(bin(el)), arr[1])))
+        elif choice == 4:
+          print("Для поля GF(2^n) введите соответствующие значение n и образующий многочлен")
+          n = int(input("n: "))
+          obr = int(input("Oбразующий многочлен: "))
+          print(getInfoGFN(n, obr))
+          
         elif choice == 0:
            break
         else:
             print("Неверный выбор программы.")
-    except ValueError:
-        print("Пожалуйста, введите число.")
     except Exception as e:
         print(f"Произошла ошибка: {e}")
 

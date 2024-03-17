@@ -134,6 +134,65 @@ def allPrimitiveElements(n):
   return ansArray
 
 
+def fieldExtension(n, mod):
+  fieldEx = [1]
+  pMinusOne = pow(2, n) - 1
 
-print(multP(0b1000000000000,0b1000,0b11001))
-print(powP(0b1000,5,0b11001))
+  for _ in range(pMinusOne - 1):
+    fieldEx.append(divP(fieldEx[-1] << 1, mod)[0])
+
+  return fieldEx
+
+
+def allCycleClasses(n):
+  pMinusOne = pow(2, n) - 1
+  cycleClasses = set()
+
+  for el in range(pMinusOne):
+    cycleClass = []
+
+    for deg in range(n):
+      cycleClass.append((el * pow(2, deg)) % pMinusOne)
+
+    cycleClasses.add(frozenset(cycleClass))
+    
+  return list(map(lambda frozenset: set(frozenset), (list(cycleClasses))))
+
+
+def findAllminP(n, cycleClasses, mod, fieldEx):
+  minPs = []
+
+  newX = 1
+
+  for cycleClass in cycleClasses:
+    minP = None
+
+    for el in cycleClass:
+      if minP is None:
+        minP = [fieldEx[el], newX]
+      else:
+        for i in range(len(minP) - 1, 0, -1):
+          minP[i] = multP(minP[i], fieldEx[el], mod) ^ minP[i - 1]
+        minP[0] = multP(minP[0], fieldEx[el], mod)
+
+        minP.append(newX)
+
+    for i in range(1, len(minP)):
+      if(minP[i] != 0):
+        minP[i] = minP[i] << i
+    
+    ans = 0
+    for mp in minP:
+      ans ^= mp
+
+    minPs.append((cycleClass,ans))
+
+  return minPs
+
+
+def getInfoGFN(n, mod):
+  fieldEx = fieldExtension(n, mod)
+
+  minPs = findAllminP(n, allCycleClasses(n), mod, fieldEx)
+
+  return fieldEx, minPs
