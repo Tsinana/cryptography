@@ -1,5 +1,6 @@
-from utils.primitiveElementsGF import allPrimitiveElements, getInfoGFN
+from utils.GFTwoWorkers import allPrimitiveElements, getInfoGFN
 from utils.eulerFunction import *
+from utils.simpleNumberTests import isSimpleMillerRabin
 
 1
 def main():
@@ -12,6 +13,7 @@ def main():
         print("(2)\tВычисления целых степеней по заданному модулю ")
         print("(3)\tПостроения всех примитивов заданного поля GF(2^n)")
         print("(4)\tПостроение циклотомических классов с из мин полиномами")
+        print("(5)\tПроверка на простоту числа тестом Миллера-Рабина")
         print("(0)\tВыход")
 
         choice = int(input("Выбор: "))
@@ -52,7 +54,10 @@ def main():
           n = int(input("n: "))
           obr = int(input("Oбразующий многочлен: "))
           print(getInfoGFN(n, obr))
-          
+        elif choice == 5:
+          print("Введите проверяемое число (n) и число проверок (r)")
+          n = int(input("n: "))
+          print(isSimpleMillerRabin(n))
         elif choice == 0:
            break
         else:
