@@ -1,6 +1,6 @@
 from utils.GFTwoWorkers import allPrimitiveElements, getInfoGFN
 from utils.eulerFunction import *
-from utils.simpleNumberTests import isSimpleMillerRabin
+from utils.simpleNumberTests import isSimpleMillerRabin, isSimpleSquareRoot
 
 1
 def main():
@@ -13,7 +13,7 @@ def main():
         print("(2)\tВычисления целых степеней по заданному модулю ")
         print("(3)\tПостроения всех примитивов заданного поля GF(2^n)")
         print("(4)\tПостроение циклотомических классов с из мин полиномами")
-        print("(5)\tПроверка на простоту числа тестом Миллера-Рабина")
+        print("(5)\tПроверка на простоту числа")
         print("(0)\tВыход")
 
         choice = int(input("Выбор: "))
@@ -55,9 +55,21 @@ def main():
           obr = int(input("Oбразующий многочлен: "))
           print(getInfoGFN(n, obr))
         elif choice == 5:
-          print("Введите проверяемое число (n) и число проверок (r)")
+          print("\nВыбор теста:")
+          print("(1)\tПроверка квадратичным корнем")
+          print("(2)\tПроверка тестом Миллера-Рабина")
+          method_choice = int(input("Выбор метода: "))
+          print("\nВведите проверяемое число (n)")
           n = int(input("n: "))
-          print(isSimpleMillerRabin(n))
+          ans_str = "Ответ: "
+          if method_choice == 1:
+            ans_str += str(isSimpleSquareRoot(n))
+          elif method_choice == 2:
+            ans_str += str(isSimpleMillerRabin(n))
+          else:
+            ans_str = "Неверный выбор метода."
+          print("\n" + ans_str)
+
         elif choice == 0:
            break
         else:

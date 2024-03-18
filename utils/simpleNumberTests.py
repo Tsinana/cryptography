@@ -2,6 +2,14 @@ import math
 from utils.simpleOparections import powm
 
 
+def isSimpleSquareRoot(n):
+  for a in range(2, n - 1):
+    if powm(a, 2, n) in {n - 1, 1}:
+      return False
+    
+  return True
+
+
 def isSimpleMillerRabin(n):
   """Проверка на простоту с помощью теста Миллера-Рабина. Аргументы: n - проверяемое число, r - число проверок"""
 
