@@ -1,6 +1,6 @@
 from utils.GFTwoWorkers import allPrimitiveElements, getInfoGFN
 from utils.eulerFunction import *
-from utils.simpleNumberTests import isSimpleMillerRabin, isSimpleSquareRoot
+from utils.simpleNumberTests import isSimpleFerma, isSimpleMillerRabin, isSimpleSquareRoot
 
 1
 def main():
@@ -58,6 +58,7 @@ def main():
           print("\nВыбор теста:")
           print("(1)\tПроверка квадратичным корнем")
           print("(2)\tПроверка тестом Миллера-Рабина")
+          print("(3)\tПроверка тестом Ферма")
           method_choice = int(input("Выбор метода: "))
           print("\nВведите проверяемое число (n)")
           n = int(input("n: "))
@@ -66,6 +67,8 @@ def main():
             ans_str += str(isSimpleSquareRoot(n))
           elif method_choice == 2:
             ans_str += str(isSimpleMillerRabin(n))
+          elif method_choice == 3:
+            ans_str += str(isSimpleFerma(n))
           else:
             ans_str = "Неверный выбор метода."
           print("\n" + ans_str)

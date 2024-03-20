@@ -196,3 +196,5 @@ def getInfoGFN(n, mod):
   minPs = findAllminP(n, allCycleClasses(n), mod, fieldEx)
 
   return fieldEx, minPs
+
+# print(getInfoGFN(4,0b10011))

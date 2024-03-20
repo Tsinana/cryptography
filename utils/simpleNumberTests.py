@@ -10,6 +10,9 @@ def isSimpleSquareRoot(n):
   return True
 
 
+def isSimpleFerma(n):
+  return powm(2, n - 1, n) == 1
+
 def isSimpleMillerRabin(n):
   """Проверка на простоту с помощью теста Миллера-Рабина. Аргументы: n - проверяемое число, r - число проверок"""
 
@@ -32,7 +35,7 @@ def isSimpleMillerRabin(n):
         x_i = x_0
         nMinesOneInX = False
 
-        for i_s in range(s):
+        for _ in range(s - 1):
           x_next = powm(x_i, 2, n)
 
           if x_next == nMinesOne:
